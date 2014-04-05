@@ -21,7 +21,7 @@
     (.order bb ByteOrder/LITTLE_ENDIAN)
     bb))
 
-(defmulti opcode (fn [b _] (bit-or b 0x00)))
+(defmulti opcode (fn [b _] b))
 
 (defmethod opcode 0x80
   [_ bb]
@@ -96,7 +96,9 @@
   "Given a pickle AST as yielded by raw->ast, and assuming we're dealing
    with graphite pickled data, yield a list of metrics"
   [ast]
-  (assert (= (first ast) {:type :protocol :version 2}))
+  (let [{:keys [type version]} (first ast)]
+    (assert (and (= type :protocol)
+                 (>= version 2))))
   (loop [stack          nil
          [opcode & ast] (rest ast)]
     (if opcode
