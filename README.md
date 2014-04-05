@@ -1,5 +1,16 @@
 # pickler: just enough pickle for graphite
 
+## Installation
+
+To install pickler, add the following dependency to your `project.clj`
+file:
+
+```
+[org.spootnik/pickler "0.1.0"]
+```
+
+## Usage
+
 A simple namespace which exposes twos functions `raw->ast` and
 `ast->metrics`
 
