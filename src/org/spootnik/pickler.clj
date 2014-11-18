@@ -72,7 +72,7 @@
 
 (defmethod opcode :default
   [val bb]
-  (throw (ex-info "invalid pickle data")
+  (throw (ex-info "invalid pickle data" {})
          {:opcode val :position (.position bb)}))
 
 (defn raw->ast
