@@ -51,9 +51,31 @@
      :size size
      :val (String. ba "UTF-8")}))
 
+(defmethod opcode 0x54
+  [_ bb]
+  (let [size (.getInt bb)
+        ba   (byte-array size)]
+    (dotimes [i size]
+      (aset-byte ba i (unchecked-byte (bit-and (.get bb) 0xff))))
+    {:type :unicode
+     :size size
+     :val (String. ba "UTF-8")}))
+
+(defmethod opcode 0x55
+  [_ bb]
+  (let [size (int (bit-and (.get bb) 0xff))
+        ba   (byte-array size)]
+    (dotimes [i size]
+      (aset-byte ba i (unchecked-byte (bit-and (.get bb) 0xff))))
+    {:type :unicode
+     :size size
+     :val (String. ba "UTF-8")}))
+
 (defmethod opcode 0x4a
   [_ bb]
-  {:type :int :val (.getInt bb)})
+  (.order bb ByteOrder/LITTLE_ENDIAN)
+  (let [val (bit-and (.getInt bb) 0xffffffff)]
+    {:type :int :val val}))
 
 (defmethod opcode 0x47
   [_ bb]
@@ -61,6 +83,10 @@
   (let [val (.getDouble bb)]
     (.order bb ByteOrder/LITTLE_ENDIAN)
     {:type :double :val val}))
+
+(defmethod opcode 0x74
+  [_ bb]
+  {:type :tuple})
 
 (defmethod opcode 0x65
   [_ bb]
@@ -98,9 +124,6 @@
   "Given a pickle AST as yielded by raw->ast, and assuming we're dealing
    with graphite pickled data, yield a list of metrics"
   [ast]
-  (let [{:keys [type version]} (first ast)]
-    (assert (and (= type :protocol)
-                 (>= version 2))))
   (loop [stack          nil
          [opcode & ast] (rest ast)]
     (if opcode
