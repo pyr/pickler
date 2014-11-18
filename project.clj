@@ -1,4 +1,4 @@
-(defproject org.spootnik/pickler "0.1.1"
+(defproject org.spootnik/pickler "0.1.2"
   :description "just enough pickle for graphite"
   :url "https://github.com/pyr/pickler"
   :license {:name "Eclipse Public License"
