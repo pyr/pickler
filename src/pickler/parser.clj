@@ -1,4 +1,4 @@
-(ns org.spootnik.pickler
+(ns pickler.parser
   "Just enough pickle for graphite"
   (:import java.nio.ByteBuffer
            java.nio.ByteOrder
