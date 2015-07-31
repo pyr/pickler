@@ -1,4 +1,8 @@
-# pickler: just enough pickle for graphite
+pickler: just enough pickle for graphite
+========================================
+
+[![Build Status](https://secure.travis-ci.org/pyr/pickler.png)](http://travis-ci.org/pyr/pickler)
+
 
 ## Installation
 
@@ -6,7 +10,7 @@ To install pickler, add the following dependency to your `project.clj`
 file:
 
 ```
-[org.spootnik/pickler "0.1.0"]
+[spootnik/pickler "0.1.6"]
 ```
 
 ## Usage
