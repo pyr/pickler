@@ -30,7 +30,6 @@ Wonder who would be stupid enough to write this ? Check-out [cyanite](https://gi
 
 # License
 
-Copyright © 2014 Pierre-Yves Ritschard
+Copyright © 2014, 2015 Pierre-Yves Ritschard
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the MIT License
