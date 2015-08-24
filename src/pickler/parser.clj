@@ -77,6 +77,11 @@
   (let [val (bit-and (.getInt bb) 0xffffffff)]
     {:type :int :val val}))
 
+(defmethod opcode 0x4b
+  [_ bb]
+  (let [val (bit-and (-> bb .get .byteValue) 0xff)]
+    {:type :int :val val}))
+
 (defmethod opcode 0x47
   [_ bb]
   (.order bb ByteOrder/BIG_ENDIAN)
@@ -87,6 +92,14 @@
 (defmethod opcode 0x74
   [_ bb]
   {:type :tuple})
+
+(defmethod opcode 0x86
+  [_ bb]
+  {:type :tuple})
+
+(defmethod opcode 0x61
+  [_ bb]
+  {:type :append})
 
 (defmethod opcode 0x65
   [_ bb]
